@@ -16,8 +16,8 @@ export default async function Start() {
 		secret: process.env.AUTH0_SECRET,
 		clientSecret: process.env.CLIENT_SECRET,
 		baseURL: 'http://localhost:3030',
-		clientID: 'WUwywZatINYpNe21i0AMEdPhPfahb8NZ',
-		issuerBaseURL: 'https://dev-km2o286y.us.auth0.com',
+		clientID: process.env.AUTH0_CLIENTID,
+		issuerBaseURL: process.env.AUTH0_BASEURL,
 		routes: {
 			login: false,	
 			postLogoutRedirect: '/main/login',
