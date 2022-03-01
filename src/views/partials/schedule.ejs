@@ -1,0 +1,50 @@
+<div class="jumbotron">
+    <h1>Current Schedule</h1>
+    <p>You can update it on the homepage, or delete it down below</p>
+    <table class="styled-table">
+      <%const Dates = ['MO','TU','WE','TH','FR'];%>
+      <% Dates.forEach(function(Date) { %>
+        <thead>
+          <tr>
+            <%
+            const dateArray = {
+              'MO':'Monday',
+              'TU':'Tuesday',
+              'WE':'Wednesday',
+              'TH':'Thursday',
+              'FR':'Friday'
+            }
+            %>
+            <th ><%= dateArray[Date] %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <% schedule[Date].forEach(function(Class) { %>
+                <td><%= Class.Class %></td>
+            <% }); %>
+          </tr>
+        </tbody>
+      <% }); %>
+    </table>
+    <div class="btn-group">
+      <form align="left" name="form1" method="POST" action="/api/schedule/delete" enctype="multipart/form-data">
+        <input class="button" style="margin:5px;" name="submit2" type="submit" id="submit2" value="Delete Schedule" onclick="return confirm('Are you sure?')">
+      </form>
+      <form action="/api/schedule/update" method="POST" enctype="multipart/form-data">
+        <label class="button" style="margin:5px;" id="button-label" for="actual-btn">Update Schedule</label>
+        <input class="button" type="file" accept=".ics" id="actual-btn" name="filename" hidden>
+        <input class="button" style="margin:5px;" id="submit-file" value="Upload" type="submit">
+      </form>
+      <script>
+        let x = document.getElementById("submit-file");
+        const actualBtn = document.getElementById('actual-btn');
+        const BtnLabel = document.getElementById('button-label');
+        x.style.display = "none"
+        actualBtn.addEventListener('change', function(){
+          BtnLabel.textContent = `"${this.files[0].name}" Selected`
+          x.style.display = "block";
+        })
+      </script>
+      </div>
+  </div>
